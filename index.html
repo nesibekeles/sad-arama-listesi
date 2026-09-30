@@ -258,10 +258,39 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
 .ep-nums em{font-style:normal;font-size:11px;font-weight:700;background:var(--s1-100);color:var(--s1-700);border-radius:999px;padding:1px 8px;margin-left:auto}
 .ep-nums em.ok{background:#D1FAE5;color:#065F46}
 .ep-track{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;margin:6px 0 5px}
-.ep-track i{display:block;height:100%;background:var(--s1);border-radius:4px;transition:width .3s}
+.ep-track i{display:block;height:100%;background:#F43F5E;border-radius:4px;transition:width .3s}
 .ep-note{font-size:11.5px;color:var(--ink-3)}
 .ep-note b{color:var(--ink-2)}
+.ep-mini{font-size:10.5px;color:var(--ink-3);margin-top:3px}
+.ep-mini b{color:var(--ink-2);font-weight:600}
 @media(max-width:720px){.ep-row{grid-template-columns:38px 1fr;grid-auto-rows:auto}.ep-row .ep-mid{grid-column:1/-1}}
+
+/* GK toggle */
+.ep-gk{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:550;color:var(--ink-2);
+  cursor:pointer;background:var(--surface);border:1px solid var(--hair);border-radius:999px;padding:5px 13px;user-select:none}
+.ep-gk input{display:none}
+.ep-gk i{width:30px;height:17px;border-radius:999px;background:var(--grid);position:relative;transition:background .15s;flex:0 0 auto}
+.ep-gk i::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;transition:left .15s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.ep-gk input:checked+i{background:var(--s1)}
+.ep-gk input:checked+i::after{left:15px}
+
+/* 5-stage funnel */
+.ep-funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:14px;align-items:stretch}
+.ep-fc{position:relative;background:var(--surface);border:1px solid var(--hair);border-radius:var(--r);padding:12px 14px;margin-right:20px}
+.ep-fc:last-child{margin-right:0}
+.ep-fc::after{content:"→";position:absolute;right:-16px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:14px}
+.ep-fc:last-child::after{content:none}
+.ep-fc .k{font-size:10.5px;color:var(--ink-3);font-weight:650;text-transform:uppercase;letter-spacing:.4px;line-height:1.3}
+.ep-fc .v{font-size:23px;font-weight:750;letter-spacing:-.5px;margin-top:3px;font-variant-numeric:tabular-nums}
+.ep-fc .s{font-size:10.5px;color:var(--ink-3);margin-top:2px;line-height:1.35}
+.ep-fc .s b{color:var(--ink-2)}
+@media(max-width:1100px){.ep-funnel{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}.ep-fc{margin-right:0}.ep-fc::after{content:none}}
+
+/* split layout: donuts left (~38%), leaderboard right */
+.ep-cols{display:grid;grid-template-columns:minmax(0,38fr) minmax(0,62fr);gap:14px;align-items:start}
+.ep-left{display:flex;flex-direction:column;gap:14px}
+@media(max-width:980px){.ep-cols{grid-template-columns:1fr}}
+.ep-done{display:inline-flex;align-items:center;gap:5px;background:#D1FAE5;color:#065F46;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:700}
 
 /* ---------- about ---------- */
 .prose{max-width:860px;font-size:13px;line-height:1.6}
@@ -350,20 +379,24 @@ html.locked .top,html.locked main{display:none}
 <!-- ===================== EKİP PANOSU ===================== -->
 <section id="lead" class="view">
   <h1 class="ep-title">Ekip Performans &amp; Gamification Panosu</h1>
-  <div class="ep-sub">Sonitel 45 sn+ görüşmeler · Ekmob randevu / ziyaret / sözleşme · kota 100 görüşme &amp; 3 randevu / gün ·
+  <div class="ep-sub">Arama listesi + liste dışı aramalar · Ekmob randevu / ziyaret / sözleşme · hedef: ekip 15 randevu/gün (kişi 3), 100 görüşme/gün ·
     <b>temsili veri</b> — Sonitel/Ekmob entegrasyonu kurulunca gerçek veriyle dolar</div>
   <div class="ep-bar">
     <div class="seg" id="epRange"></div>
-    <div class="ep-dates"><input type="date" id="epFrom" aria-label="Başlangıç"><span>–</span><input type="date" id="epTo" aria-label="Bitiş"></div>
+    <div class="ep-dates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg><input type="date" id="epFrom" aria-label="Başlangıç"><span>–</span><input type="date" id="epTo" aria-label="Bitiş"></div>
     <select class="sel" id="epRep"></select>
+    <label class="ep-gk" title="Görüşme Kalitesi / memnuniyet aramalarını tüm arama ve funnel metriklerine dahil et"><input type="checkbox" id="epGk"><i></i>GK Dahil Et</label>
   </div>
-  <div class="ep-grid">
-    <div class="card" id="epA"></div>
-    <div class="card" id="epB"></div>
-  </div>
-  <div class="card">
-    <div class="ep-lb-head"><h2>Temsilci Sıralaması</h2><div class="seg" id="epMetric"></div></div>
-    <div id="epLb"></div>
+  <div class="ep-funnel" id="epFunnel"></div>
+  <div class="ep-cols">
+    <div class="ep-left">
+      <div class="card" id="epA"></div>
+      <div class="card" id="epB"></div>
+    </div>
+    <div class="card ep-right">
+      <div class="ep-lb-head"><h2>Ekip Sıralaması</h2><div class="seg" id="epMetric"></div></div>
+      <div id="epLb"></div>
+    </div>
   </div>
 </section>
 
@@ -703,62 +736,74 @@ function openDetail(cid){
 }
 
 /* =================== EKİP PANOSU (gamification) ===================
-   Spec: "Satış Destek, Ekip Panosu 1.1.docx". Sonitel 45s+ contacts and Ekmob
-   appointment data do not exist in the payload yet, so the pano runs on
-   DETERMINISTIC MOCK DATA (seeded per rep+day) — labeled "temsili veri" in the UI.
-   Design, filters, targets and the gamification rule engine are per spec. */
+   Spec: "Satış Destek, Ekip Panosu 1.2" (supersedes 1.1). Sonitel and Ekmob data
+   do not exist in the payload yet, so the pano runs on DETERMINISTIC MOCK DATA
+   (seeded per rep+day) — labeled "temsili veri" in the UI. Layout, filters, the
+   5-stage funnel, targets, donut color thresholds and the gamification rule
+   engine are per spec. "Hedef" wording throughout — never "kota". */
 function renderOutcome(){ /* legacy hook from wbSet -- pano needs no per-change refresh */ }
 (function(){
   const TODAY=new Date(D.generated+'T00:00:00');
-  const TEAM=D.team.members.concat([D.team.lead]);
-  const CQ=100, AQ=3;                        // daily baselines: 100 görüşme · 3 randevu
-  const PROF={ };                             // [contact lo,hi, appt lo,hi]
-  TEAM.forEach((m,i)=>{ PROF[m]=[[80,112,2.2,4.2],[95,128,2.6,4.8],[72,104,1.8,3.8],[58,92,1.2,3.0]][i%4]; });
+  const LEAD=D.team.lead;
+  const TEAM=[LEAD, ...D.team.members];               // lead + 3 core reps
+  const repLabel=m=> m===LEAD? `${m.split(' ')[0]} (Ekip Lideri)` : m;
+  const CQ=100;                                        // görüşme hedefi / kişi / gün
+  const AQ_REP=3, AQ_TEAM=15;                          // randevu hedefi: kişi 3/gün · ekip 15/gün
+  /* mock profiles per rep: [list-call lo,hi · liste dışı lo,hi · GK lo,hi · randevu lo,hi] */
+  const PROFS=[[52,78,4,12,4,10,1.2,3.0],[62,88,6,16,5,12,1.8,3.8],[70,96,8,18,6,13,2.6,4.8],[58,84,5,14,4,11,2.2,4.2]];
+  const PROF={}; TEAM.forEach((m,i)=>PROF[m]=PROFS[i%4]);
   const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   const isWork=d=>d.getDay()>=1&&d.getDay()<=5;
   function rng(seed){ let s=0; for(const ch of seed) s=(s*31+ch.charCodeAt(0))>>>0;
     return ()=>{ s=(s*1103515245+12345)>>>0; return (s>>>8)/16777216; }; }
-  const DB={};
+  /* DB covers the whole of 2026 up to the data date (Bu Yıl range) */
+  const DB={}, Y0=new Date('2026-01-01T00:00:00');
   TEAM.forEach(rep=>{ const p=PROF[rep], rows={};
-    for(let i=0;i<75;i++){ const d=new Date(TODAY); d.setDate(d.getDate()-i);
+    for(let d=new Date(Y0); d<=TODAY; d.setDate(d.getDate()+1)){
       if(!isWork(d)) continue;
       const r=rng(rep+'|'+iso(d));
-      const c=Math.round(p[0]+(p[1]-p[0])*r());
-      const b=Math.round(p[2]+(p[3]-p[2])*r());
-      const g=Math.min(b,Math.round(b*(0.55+0.35*r())));
-      const s=Math.min(g,Math.round(g*(0.2+0.35*r())));
-      rows[iso(d)]={c,b,g,s};
+      const cl=Math.round(p[0]+(p[1]-p[0])*r());      // arama listesi (Ulaşılamadı hariç)
+      const cd=Math.round(p[2]+(p[3]-p[2])*r());      // liste dışı aramalar
+      const gk=Math.round(p[4]+(p[5]-p[4])*r());      // GK / memnuniyet aramaları
+      const b=Math.round(p[6]+(p[7]-p[6])*r());       // randevu (liste + liste dışı + Ekmob onaylı)
+      const g=Math.min(b,Math.round(b*(0.55+0.35*r())));  // Ekmob "Gerçekleşen"
+      const s=Math.min(g,Math.round(g*(0.2+0.35*r())));   // sözleşme
+      rows[iso(d)]={cl,cd,gk,b,g,s};
     } DB[rep]=rows; });
 
-  let range='son7', rep='', metric='c';
+  let range='buhafta', rep='', metric='b', gkOn=false;  // default tab: Randevu Sıralaması
   function bounds(){
     const t=new Date(TODAY); let d0=new Date(t), d1=new Date(t);
+    const mon=x=>{ const d=new Date(x); d.setDate(d.getDate()-((d.getDay()+6)%7)); return d; };
     if(range==='dun'){ d0.setDate(t.getDate()-1); d1=new Date(d0); }
-    else if(range==='son7') d0.setDate(t.getDate()-6);
+    else if(range==='buhafta') d0=mon(t);
+    else if(range==='gecenhafta'){ d0=mon(t); d0.setDate(d0.getDate()-7); d1=new Date(d0); d1.setDate(d1.getDate()+6); }
     else if(range==='buay') d0.setDate(1);
     else if(range==='gecenay'){ d0=new Date(t.getFullYear(),t.getMonth()-1,1); d1=new Date(t.getFullYear(),t.getMonth(),0); }
-    else if(range==='son30') d0.setDate(t.getDate()-29);
+    else if(range==='buyil') d0=new Date(Y0);
     else if(range==='ozel'){ const f=$('#epFrom').value, u=$('#epTo').value;
       if(f&&u){ d0=new Date(f+'T00:00:00'); d1=new Date(u+'T00:00:00'); if(d0>d1) [d0,d1]=[d1,d0]; } }
     return [d0,d1];
   }
   function workdays(a,b){ let n=0; const d=new Date(a); while(d<=b){ if(isWork(d)) n++; d.setDate(d.getDate()+1);} return Math.max(n,1); }
-  function sums(m,a,b){ const o={c:0,b:0,g:0,s:0}, rows=DB[m]; const d=new Date(a);
-    while(d<=b){ const r=rows[iso(d)]; if(r){o.c+=r.c;o.b+=r.b;o.g+=r.g;o.s+=r.s;} d.setDate(d.getDate()+1);} return o; }
+  function sums(m,a,b){ const o={cl:0,cd:0,gk:0,b:0,g:0,s:0}, rows=DB[m]; const d=new Date(a);
+    while(d<=b){ const r=rows[iso(d)]; if(r){o.cl+=r.cl;o.cd+=r.cd;o.gk+=r.gk;o.b+=r.b;o.g+=r.g;o.s+=r.s;} d.setDate(d.getDate()+1);} return o; }
+  const calls=o=>o.cl+o.cd+(gkOn?o.gk:0);              // GK toggle feeds every call metric
 
+  /* Donut ring color by attainment band (spec 4) */
+  function ringColor(p){ return p>=1?'#10B981':p>=.7?'#15803D':p>=.5?'#84CC16':p>=.4?'#EAB308':p>=.2?'#F97316':'#EF4444'; }
   function donut(el,o){
-    const pct=o.target? o.value/o.target : 0;
-    const done=pct>=1, col=done?'#10B981':'var(--s1)';
+    const pct=o.target? o.value/o.target : 0, done=pct>=1, col=ringColor(pct);
     const C=2*Math.PI*52;
     el.innerHTML=`<h2>${o.title}</h2><div class="hint">${o.hint}</div>
       <div class="ep-d-body">
         <div class="ep-ring"><svg viewBox="0 0 120 120" aria-hidden="true">
           <circle cx="60" cy="60" r="52" class="tr"/>
           <circle cx="60" cy="60" r="52" class="pr" style="stroke:${col};stroke-dasharray:${C.toFixed(1)};stroke-dashoffset:${(C*(1-Math.min(pct,1))).toFixed(1)}"/>
-        </svg><div class="ep-pct" style="color:${done?'#059669':'var(--s1-550)'}">%${Math.round(pct*100)}</div></div>
+        </svg><div class="ep-pct" style="color:${done?'#059669':'var(--ink)'}">%${Math.round(pct*100)}</div></div>
         <div class="ep-d-nums">
           <div class="big">${nf(o.value)} <span>/ ${nf(o.target)}</span></div>
-          <div class="rem">${o.value>=o.target?'<span class="ep-ok">Hedef tamamlandı</span>':`Kotaya kalan: <b>${nf(o.target-o.value)}</b> ${o.unit}`}</div>
+          <div class="rem">${done?'<span class="ep-done">✓ Tamamlandı</span>':`Hedefe kalan: <b>${nf(o.target-o.value)}</b> ${o.unit}`}</div>
           ${o.badges||''}
         </div>
       </div>`;
@@ -768,47 +813,69 @@ function renderOutcome(){ /* legacy hook from wbSet -- pano needs no per-change 
     const [a,b]=bounds(), wd=workdays(a,b);
     const per=TEAM.map(m=>({m,...sums(m,a,b)}));
     const scope=rep? per.filter(p=>p.m===rep) : per;
-    const tot=scope.reduce((o,p)=>({c:o.c+p.c,b:o.b+p.b,g:o.g+p.g,s:o.s+p.s}),{c:0,b:0,g:0,s:0});
-    const n=scope.length||1, who=rep||'tüm ekip';
-    donut($('#epA'),{title:'Toplam Etkili Görüşme',hint:`Sonitel · 45 sn üzeri bağlantılar · ${who} · ${wd} iş günü`,
-      value:tot.c, target:wd*CQ*n, unit:'görüşme'});
-    donut($('#epB'),{title:'Randevular &amp; Saha Dönüşümü',hint:`Ekmob · beklenen tempo 3 randevu/gün · ${who} · ${wd} iş günü`,
-      value:tot.b, target:wd*AQ*n, unit:'randevu',
+    const tot=scope.reduce((o,p)=>({cl:o.cl+p.cl,cd:o.cd+p.cd,gk:o.gk+p.gk,b:o.b+p.b,g:o.g+p.g,s:o.s+p.s}),{cl:0,cd:0,gk:0,b:0,g:0,s:0});
+    const n=scope.length||1, who=rep?repLabel(rep):'tüm ekip';
+    const totCalls=calls(tot);
+    const apptTarget = rep? wd*AQ_REP : wd*AQ_TEAM;    // ekip 15/gün · kişi 3/gün — "Hedef"
+
+    /* ---- 5-stage funnel ---- */
+    const perRep=tot.g/n;
+    const attain=apptTarget? tot.b/apptTarget*100 : 0;
+    $('#epFunnel').innerHTML=[
+      ['Görüşme Sayısı', nf(totCalls), 'Ulaşılamadı hariç net aramalar'+(gkOn?' · <b>GK dahil</b>':'')],
+      ['Randevu Sayısı', nf(tot.b), `Görüşmeden randevuya dönüşüm: <b>%${totCalls?(tot.b/totCalls*100).toFixed(1).replace('.',','):'0'}</b>`],
+      ['Gerçekleşen Randevu Sayısı', nf(tot.g), `Gerçekleşme oranı: <b>%${tot.b?(tot.g/tot.b*100).toFixed(0):'0'}</b> (gerçekleşen / alınan)`],
+      ['Satışçı Başına Randevu', perRep.toFixed(1).replace('.',','), 'Aktif satışçı ortalaması'+(rep?'':` · ${n} kişi`)],
+      ['Hedefe Göre Başarı %', '%'+Math.round(attain), `Hedef: <b>${nf(apptTarget)}</b> randevu · ${wd} iş günü`],
+    ].map(([k,v,s])=>`<div class="ep-fc"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
+
+    /* ---- donuts ---- */
+    donut($('#epA'),{title:'Toplam Etkili Görüşme',hint:`Arama listesi + liste dışı${gkOn?' + GK':''} · ${who} · ${wd} iş günü`,
+      value:totCalls, target:wd*CQ*n, unit:'görüşme'});
+    donut($('#epB'),{title:'Toplam Randevu &amp; Saha Dönüşümü',hint:`Ekmob · ${who} · ${wd} iş günü`,
+      value:tot.b, target:apptTarget, unit:'randevu',
       badges:`<div class="ep-badges"><span class="ep-bd g">Gerçekleşen ziyaret <b>${nf(tot.g)}</b></span><span class="ep-bd s">Sözleşme <b>${nf(tot.s)}</b></span></div>`});
 
-    const key=metric, unit=metric==='c'?'görüşme':'randevu', tgt=metric==='c'?wd*CQ:wd*AQ;
-    const list=[...per].sort((x,y)=>(y[key]-x[key])||x.m.localeCompare(y.m,'tr'));
-    $('#epLb').innerHTML=list.map((p,i)=>{
-      const v=p[key], pct=v/tgt*100;
-      let note;
-      if(i===0){ const diff=v-(list[1]?list[1][key]:0);
-        note=diff>0?`1. sırada: en yakın rakibinden <b>${nf(diff)}</b> ${unit} önde`:'1. sırada: en yakın rakibiyle eşit'; }
-      else{ const rem=tgt-v, over=(list[i-1][key]-v)+1;
-        note=(rem>0?`Hedefe <b>${nf(rem)}</b> ${unit} kaldı`:'Hedef aşıldı')+`; ${i}. olmaya <b>${nf(over)}</b> ${unit} kaldı`; }
-      const rk=i<3?['gold','silver','bronze'][i]:'';
+    /* ---- Ekip Sıralaması ---- */
+    const unit=metric==='c'?'görüşme':'randevu', tgt=metric==='c'?wd*CQ:wd*AQ_REP;
+    const val=p=> metric==='c'? calls(p) : p.b;
+    const list=[...per].sort((x,y)=>(val(y)-val(x))||x.m.localeCompare(y.m,'tr'));
+    /* competition ranking: equal counts share the same rank number */
+    let lastV=null, lastRank=0;
+    const ranked=list.map((p,i)=>{ const v=val(p);
+      const rank=(v===lastV)?lastRank:i+1; lastV=v; lastRank=rank; return {p,v,rank}; });
+    const firstV=ranked.length?ranked[0].v:0;
+    $('#epLb').innerHTML=ranked.map(({p,v,rank})=>{
+      const pct=tgt? v/tgt*100 : 0;
+      let note='';
+      if(rank>1){ const rem=tgt-v, gap=(firstV-v)+1;   // spec: gap to 1st place + 1
+        note=(rem>0?`Hedefe <b>${nf(rem)}</b> ${unit} kaldı`:'Hedef tamamlandı')+`; 1. sıraya <b>${nf(gap)}</b> ${unit} kaldı`; }
+      const rk=rank===1?'gold':rank===2?'silver':rank===3?'bronze':'';
       return `<div class="ep-row ${rep===p.m?'me':''}">
-        <div class="ep-rank ${rk}">#${i+1}</div>
+        <div class="ep-rank ${rk}">#${rank}</div>
         <div>${avatar(p.m)}</div>
         <div class="ep-mid">
           <div class="ep-nums">${nf(v)} <span>/ ${nf(tgt)}</span><em class="${pct>=100?'ok':''}">%${Math.round(pct)}</em></div>
-          <div class="ep-track"><i style="width:${Math.min(pct,100).toFixed(1)}%${pct>=100?';background:#10B981':''}"></i></div>
-          <div class="ep-note">${note}</div>
+          <div class="ep-track"><i style="width:${Math.min(pct,100).toFixed(1)}%"></i></div>
+          ${note?`<div class="ep-note">${note}</div>`:''}
+          <div class="ep-mini">Görüşme <b>${nf(calls(p))}</b> · Randevu <b>${nf(p.b)}</b> · Gerçekleşen <b>${nf(p.g)}</b> · Sözleşme <b>${nf(p.s)}</b></div>
         </div></div>`; }).join('');
     if(rep){ const el=document.querySelector('.ep-row.me'); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'}); }
   }
 
-  const RANGES=[['bugun','Bugün'],['dun','Dün'],['son7','Son 7 Gün'],['buay','Bu Ay'],['gecenay','Geçen Ay'],['son30','Son 30 Gün']];
+  const RANGES=[['dun','Dün'],['bugun','Bugün'],['buhafta','Bu Hafta'],['gecenhafta','Geçen Hafta'],['buay','Bu Ay'],['gecenay','Geçen Ay'],['buyil','Bu Yıl (2026)']];
   $('#epRange').innerHTML=RANGES.map(([v,l])=>`<button data-v="${v}" class="${v===range?'on':''}">${l}</button>`).join('');
   $('#epRange').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{ range=btn.dataset.v;
     $('#epRange').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn)); render(); });
   $('#epFrom').onchange=$('#epTo').onchange=()=>{ if($('#epFrom').value&&$('#epTo').value){ range='ozel';
     $('#epRange').querySelectorAll('button').forEach(x=>x.classList.remove('on')); render(); } };
   $('#epFrom').max=$('#epTo').max=iso(TODAY);
-  $('#epFrom').min=$('#epTo').min=iso(new Date(TODAY.getTime()-74*86400000));
+  $('#epFrom').min=$('#epTo').min='2026-01-01';
   const rs=$('#epRep'); rs.appendChild(new Option('Tüm Ekip (Genel Toplam)',''));
-  TEAM.forEach(m=>rs.appendChild(new Option(m,m)));
+  TEAM.forEach(m=>rs.appendChild(new Option(repLabel(m),m)));
   rs.onchange=()=>{ rep=rs.value; render(); };
-  $('#epMetric').innerHTML=`<button data-v="c" class="on">Görüşme Sıralaması</button><button data-v="b">Randevu Sıralaması</button>`;
+  $('#epGk').onchange=()=>{ gkOn=$('#epGk').checked; render(); };
+  $('#epMetric').innerHTML=`<button data-v="b" class="on">Randevu Sıralaması</button><button data-v="c">Görüşme Sıralaması</button>`;
   $('#epMetric').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{ metric=btn.dataset.v;
     $('#epMetric').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn)); render(); });
   render();
