@@ -8,12 +8,13 @@
 <style>
 :root{
   color-scheme:light;
-  --page:#f9f9f7; --surface:#fcfcfb; --surface-2:#f3f3f0;
-  --ink:#0b0b0b; --ink-2:#52514e; --ink-3:#898781;
-  --hair:rgba(11,11,11,.10); --grid:#e1e0d9;
-  --s1:#2a78d6; --s1-100:#cde2fb; --s1-250:#86b6ef; --s1-400:#3987e5; --s1-550:#1c5cab; --s1-700:#0d366b;
+  /* düğün.com brand: primary berry/rose #E11D48 / #BE185D, slate ink #0F172A, soft borders #E2E8F0 */
+  --page:#F8FAFC; --surface:#FFFFFF; --surface-2:#F1F5F9;
+  --ink:#0F172A; --ink-2:#475569; --ink-3:#7C8798;
+  --hair:#E2E8F0; --grid:#EDF1F6;
+  --s1:#E11D48; --s1-100:#FFE4E9; --s1-250:#FDA4B4; --s1-400:#F43F5E; --s1-550:#BE185D; --s1-700:#881337;
   --violet:#4a3aa7; --violet-bg:#ece9f8;
-  --good:#0ca30c; --good-ink:#006300; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --good:#0ca30c; --good-ink:#006300; --warn:#fab219; --serious:#ec835a; --crit:#b91c1c;
   --r:10px; --r-s:6px;
 }
 *{box-sizing:border-box}
@@ -30,8 +31,10 @@ a{color:var(--s1);text-decoration:none}a:hover{text-decoration:underline}
 .top-in{max-width:1440px;margin:0 auto;padding:0 24px;height:56px;
   display:flex;align-items:center;gap:22px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:14px;letter-spacing:-.1px}
-.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--s1)}
 .brand small{font-weight:500;color:var(--ink-3);font-size:12px}
+.dlogo{height:19px;width:auto;display:block;color:var(--s1)}
+.dlogo path{fill:currentColor}
+.brand .sep{width:1px;height:18px;background:var(--hair)}
 .tabs{display:flex;gap:2px;background:var(--surface-2);padding:3px;border-radius:999px}
 .tabs button{border:0;background:transparent;padding:6px 14px;border-radius:999px;
   font-weight:550;color:var(--ink-2);cursor:pointer;font-size:12.5px}
@@ -81,11 +84,11 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
 .list th.fix,.list td.fix{position:sticky;left:0;z-index:2;background:var(--surface)}
 .list th.fix{z-index:4}
 .list td.fix{box-shadow:1px 0 0 var(--hair)}
-.list tbody tr:hover td.fix{background:#f6f9ff}
-.list tbody tr.sel td.fix{background:#eef4ff}
+.list tbody tr:hover td.fix{background:#FFF6F8}
+.list tbody tr.sel td.fix{background:#FDEAF0}
 .wb{appearance:none;-webkit-appearance:none;border:1px solid var(--hair);border-radius:6px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2352514e' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 8px center;
   padding:4px 24px 4px 8px;font-size:11.5px;color:var(--ink-2);cursor:pointer;min-width:128px}
-.wb.set{border-color:var(--s1-250);background-color:#f3f8ff;color:var(--ink);font-weight:550}
+.wb.set{border-color:var(--s1-250);background-color:#FDF2F5;color:var(--ink);font-weight:550}
 .al{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600}
 .al i{width:8px;height:8px;border-radius:50%;display:inline-block}
 .al.c i{background:var(--crit)}.al.w i{background:var(--warn)}.al.i i{background:var(--ink-3)}.al.n i{background:var(--grid)}
@@ -101,8 +104,8 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
 .list td{padding:11px 12px;border-bottom:1px solid var(--grid);vertical-align:middle}
 .list tr:last-child td{border-bottom:0}
 .list tbody tr{cursor:pointer;transition:background .08s}
-.list tbody tr:hover{background:#f6f9ff}
-.list tbody tr.sel{background:#eef4ff}
+.list tbody tr:hover{background:#FFF6F8}
+.list tbody tr.sel{background:#FDEAF0}
 .name{font-weight:600;color:var(--ink);letter-spacing:-.1px}
 .sub{font-size:11px;color:var(--ink-3);margin-top:1px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .muted{color:var(--ink-3)}
@@ -137,7 +140,7 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
   text-transform:uppercase;letter-spacing:.4px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--hair);white-space:nowrap;cursor:pointer}
 .raw td{padding:6px 10px;border-bottom:1px solid var(--grid);white-space:nowrap;font-variant-numeric:tabular-nums}
 .raw th.num,.raw td.num{text-align:right}
-.raw tbody tr:hover{background:#f6f9ff;cursor:pointer}
+.raw tbody tr:hover{background:#FFF6F8;cursor:pointer}
 
 /* ---------- drawer ---------- */
 .scrim{position:fixed;inset:0;background:rgba(11,11,11,.25);opacity:0;pointer-events:none;transition:opacity .18s;z-index:50}
@@ -187,7 +190,7 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
 .sib{width:100%;border-collapse:collapse;font-size:11.5px}
 .sib th{text-align:left;font-size:10px;color:var(--ink-3);font-weight:600;text-transform:uppercase;letter-spacing:.4px;padding:4px 6px;border-bottom:1px solid var(--hair)}
 .sib td{padding:6px;border-bottom:1px solid var(--grid);white-space:nowrap}
-.sib tr.me td{background:#eef4ff;font-weight:600}
+.sib tr.me td{background:#FDEAF0;font-weight:600}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--hair);background:var(--surface);
   border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600;color:var(--ink);cursor:pointer}
 .btn.p{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -214,6 +217,51 @@ main{max-width:1440px;margin:0 auto;padding:22px 24px 80px}
 .pill.g{background:#e4f6e4;color:var(--good-ink)}.pill.w{background:#fff3d6;color:#7a5200}.pill.c{background:#fdecec;color:var(--crit)}
 .callout{background:#fff8e6;border:1px solid #f2e2b3;border-radius:var(--r-s);padding:10px 14px;font-size:12px;color:#5a4a16;margin-bottom:14px;display:flex;gap:10px}
 .callout b{color:#3d3210}
+
+/* ---------- ekip panosu ---------- */
+.ep-title{margin:0;font-size:18px;font-weight:700;letter-spacing:-.3px}
+.ep-sub{font-size:12px;color:var(--ink-3);margin:4px 0 14px;line-height:1.5}
+.ep-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.ep-dates{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--hair);
+  border-radius:999px;padding:2px 12px;font-size:12px;color:var(--ink-3)}
+.ep-dates input{border:0;background:transparent;font-size:12px;color:var(--ink-2);outline:none;padding:4px 0;font-family:inherit}
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:980px){.ep-grid{grid-template-columns:1fr}}
+.ep-d-body{display:flex;gap:24px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.ep-ring{position:relative;width:132px;height:132px;flex:0 0 auto}
+.ep-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ep-ring .tr{fill:none;stroke:var(--surface-2);stroke-width:12}
+.ep-ring .pr{fill:none;stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .35s}
+.ep-pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:23px;font-weight:750;letter-spacing:-.5px}
+.ep-d-nums{min-width:0}
+.ep-d-nums .big{font-size:27px;font-weight:700;letter-spacing:-.5px}
+.ep-d-nums .big span{font-size:15px;color:var(--ink-3);font-weight:550}
+.ep-d-nums .rem{font-size:12.5px;color:var(--ink-2);margin-top:4px}
+.ep-d-nums .rem b{color:var(--ink)}
+.ep-ok{color:#059669;font-weight:650}
+.ep-badges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.ep-bd{font-size:11.5px;border-radius:999px;padding:3px 11px;color:var(--ink-2);border:1px solid var(--hair)}
+.ep-bd b{color:inherit}
+.ep-bd.g{background:#ECFDF5;border-color:transparent;color:#065F46}
+.ep-bd.s{background:var(--s1-100);border-color:transparent;color:var(--s1-700)}
+.ep-lb-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ep-lb-head h2{margin:0}
+.ep-row{display:grid;grid-template-columns:44px 180px 1fr;gap:14px;align-items:center;padding:12px 10px;border-top:1px solid var(--grid);border-radius:10px}
+.ep-row:first-of-type{border-top:0}
+.ep-row.me{box-shadow:0 0 0 2px var(--s1-250);background:#FFF6F8}
+.ep-rank{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:750;font-size:12px;background:var(--surface-2);color:var(--ink-2)}
+.ep-rank.gold{background:#FEF3C7;color:#92400E}
+.ep-rank.silver{background:#E5E7EB;color:#374151}
+.ep-rank.bronze{background:#FDE8D7;color:#9A3412}
+.ep-nums{font-size:15px;font-weight:700;display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+.ep-nums span{font-size:12px;color:var(--ink-3);font-weight:550}
+.ep-nums em{font-style:normal;font-size:11px;font-weight:700;background:var(--s1-100);color:var(--s1-700);border-radius:999px;padding:1px 8px;margin-left:auto}
+.ep-nums em.ok{background:#D1FAE5;color:#065F46}
+.ep-track{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;margin:6px 0 5px}
+.ep-track i{display:block;height:100%;background:var(--s1);border-radius:4px;transition:width .3s}
+.ep-note{font-size:11.5px;color:var(--ink-3)}
+.ep-note b{color:var(--ink-2)}
+@media(max-width:720px){.ep-row{grid-template-columns:38px 1fr;grid-auto-rows:auto}.ep-row .ep-mid{grid-column:1/-1}}
 
 /* ---------- about ---------- */
 .prose{max-width:860px;font-size:13px;line-height:1.6}
@@ -253,11 +301,11 @@ html.locked .top,html.locked main{display:none}
 <body>
 
 <div class="top"><div class="top-in">
-  <div class="brand"><span class="dot"></span>SAD Arama Listesi <small id="hdrScope"></small></div>
+  <div class="brand"><svg class="dlogo" viewBox="0 0 1000 190.04" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="düğün.com"><path d="M258.73,22.9l8.01-20.61c9.16,3.43,16.6,5.72,26.33,5.72,9.73,0,17.17-2.29,26.33-5.72l9.73,20.61c-11.45,5.72-22.9,9.73-36.06,9.73-13.17,0-24.61-4.01-34.34-9.73Z"/><path d="M520.89,44.08c25.19,0,40.07,13.17,44.08,43.5l7.44,53.23h-28.62s-7.44-51.52-7.44-51.52c-1.72-13.17-5.72-20.61-15.46-20.61-9.73,0-14.88,7.44-14.88,20.61v51.52s-28.62,0-28.62,0v-53.23c0-30.34,18.32-43.5,43.5-43.5Z"/><path d="M891.81,44.08c12.02,0,22.32,4.01,29.77,14.88,7.44-10.3,17.74-14.88,29.77-14.88,20.61,0,36.06,13.17,40.64,43.5l8.01,53.23h-28.05s-7.44-51.52-7.44-51.52c-1.72-13.17-7.44-20.61-17.17-20.61-9.16,0-13.74,9.16-12.59,20.61l4.58,51.52h-27.48s-4.58-51.52-4.58-51.52c-1.14-13.17-5.72-20.61-14.88-20.61-9.73,0-14.88,7.44-14.88,20.61v51.52s-28.62,0-28.62,0v-53.23c0-30.34,20.61-43.5,42.93-43.5Z"/><path d="M627.07,94.45c0-29.77,23.47-50.37,54.38-50.37,12.59,0,23.47,3.43,32.05,9.16l-9.73,22.9c-4.58-4.01-11.45-7.44-20.61-7.44-15.46,0-27.48,10.88-27.48,25.76,0,14.88,12.02,25.19,27.48,25.19,9.16,0,16.03-3.43,20.61-7.44l9.73,22.9c-8.59,5.72-19.46,9.16-32.05,9.16-30.91,0-54.38-20.03-54.38-49.8Z"/><path d="M292.21,44.08c-28.62,0-53.23,18.89-53.23,49.8,0,30.91,23.47,50.37,52.09,50.37,9.73,0,18.32-2.29,24.04-6.3,0,14.88-12.59,27.48-33.2,27.48-12.02,0-24.04-4.01-34.92-11.45l-5.72,26.33c13.74,6.3,28.62,9.73,44.08,9.73,43.5,0,59.53-28.13,59.53-58.14v-32.3c0-36.63-24.04-55.52-52.66-55.52ZM291.93,119.63c-14.31,0-24.04-10.3-24.04-25.19,0-14.88,9.73-25.76,24.04-25.76,14.31,0,24.04,10.88,24.04,25.76,0,14.88-9.73,25.19-24.04,25.19Z"/><path d="M77.28,9.73v42.36c-5.15-4.58-13.74-8.01-25.19-8.01C23.47,44.08,0,63.54,0,94.45c0,30.91,24.61,49.8,53.23,49.8,28.62,0,52.66-18.89,52.66-49.8V9.73s-28.62,0-28.62,0ZM53.23,119.63c-14.31,0-24.04-10.88-24.04-25.76,0-14.88,9.73-25.19,24.04-25.19,14.31,0,24.04,10.3,24.04,25.19,0,14.88-9.73,25.76-24.04,25.76Z"/><path d="M778.48,44.08c-29.77,0-53.23,20.61-53.23,50.37,0,29.76,23.47,49.8,53.23,49.8,29.77,0,53.23-20.03,53.23-49.8,0-29.77-23.47-50.37-53.23-50.37ZM778.48,119.63c-14.31,0-24.61-10.88-24.61-25.19,0-14.31,10.3-25.76,24.61-25.76,14.31,0,24.61,11.45,24.61,25.76,0,14.31-10.3,25.19-24.61,25.19Z"/><path d="M128.79,99.03v-51.52s28.62,0,28.62,0v51.52c0,13.17,7.44,20.61,17.17,20.61,9.73,0,17.17-7.44,17.17-20.61v-51.52s28.62,0,28.62,0v51.52c0,28.62-17.17,45.22-45.79,45.22-28.62,0-45.79-16.6-45.79-45.22Z"/><path d="M132.09,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M181.4,17.57C181.4,7.08,189.27,0,199.24,0c9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M364.05,99.03v-51.52s28.62,0,28.62,0v51.52c0,13.17,7.44,20.61,17.17,20.61,9.73,0,17.17-7.44,17.17-20.61v-51.52s28.62,0,28.62,0v51.52c0,28.62-17.17,45.22-45.79,45.22-28.62,0-45.79-16.6-45.79-45.22Z"/><path d="M367.35,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M416.67,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M583.19,126.67c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/></svg><span class="sep"></span>SAD Arama Listesi <small id="hdrScope"></small></div>
   <div class="tabs">
     <button class="on" data-v="list">Arama listesi</button>
     <button data-v="raw">Ham veri</button>
-    <button data-v="lead">Takım lideri</button>
+    <button data-v="lead">Ekip panosu</button>
     <button data-v="about">Metodoloji</button>
   </div>
   <div class="meta"><span id="hdrDate"></span><span class="demo">Örnek · Qlik değil</span></div>
@@ -299,23 +347,23 @@ html.locked .top,html.locked main{display:none}
   <div class="raw"><table id="rTbl"><thead></thead><tbody></tbody></table></div>
 </section>
 
-<!-- ===================== TEAM LEAD ===================== -->
+<!-- ===================== EKİP PANOSU ===================== -->
 <section id="lead" class="view">
-  <div class="callout"><span>⚠</span><div><b>Arama sonucu kaydı henüz yok.</b> Bu sayfa gerçek arama performansını değil,
-    listenin kendisini ölçer — kapasite, dağıtım, skor kalitesi. Sonuç kodu kaydı (PROJECT §12.1) çözülmeden
-    "arama / bağlantı / randevu" metrikleri hesaplanamaz.</div></div>
-  <div class="tiles" id="lTiles"></div>
-  <div class="grid2">
-    <div class="card"><h2>Temsilci başına yük</h2><div class="hint">Bugün atanan müşteri · hedef ≥ 100</div><div id="cRep"></div></div>
-    <div class="card"><h2>Kapasite</h2><div class="hint">Uygun havuz ÷ günlük ihtiyaç = kaç iş günü yeter</div><table class="cap" id="cCap"></table></div>
+  <h1 class="ep-title">Ekip Performans &amp; Gamification Panosu</h1>
+  <div class="ep-sub">Sonitel 45 sn+ görüşmeler · Ekmob randevu / ziyaret / sözleşme · kota 100 görüşme &amp; 3 randevu / gün ·
+    <b>temsili veri</b> — Sonitel/Ekmob entegrasyonu kurulunca gerçek veriyle dolar</div>
+  <div class="ep-bar">
+    <div class="seg" id="epRange"></div>
+    <div class="ep-dates"><input type="date" id="epFrom" aria-label="Başlangıç"><span>–</span><input type="date" id="epTo" aria-label="Bitiş"></div>
+    <select class="sel" id="epRep"></select>
   </div>
-  <div class="grid2">
-    <div class="card"><h2>Skor dağılımı</h2><div class="hint">Uygun havuzdaki tüm müşteriler</div><div id="cHist"></div></div>
-    <div class="card"><h2>Havuz: il × kategori</h2><div class="hint">Uygun havuzdaki müşteri sayısı</div><div id="cSeg"></div></div>
+  <div class="ep-grid">
+    <div class="card" id="epA"></div>
+    <div class="card" id="epB"></div>
   </div>
-  <div class="grid2">
-    <div class="card"><h2>Sonuç kodu — bu oturum</h2><div class="hint">Listedeki "Sonuç Kodu" seçimleri. <b>Yalnızca bu tarayıcıda saklanır</b> — gerçek kayıt değil; kayıt altyapısı kurulunca buradaki metrikler gerçek olur.</div><div id="cOut"></div></div>
-    <div class="card"><h2>Tamamlanma</h2><div class="hint">Sonuç kodu girilen ÷ bugün atanan, temsilci başına</div><div id="cDone"></div></div>
+  <div class="card">
+    <div class="ep-lb-head"><h2>Temsilci Sıralaması</h2><div class="seg" id="epMetric"></div></div>
+    <div id="epLb"></div>
   </div>
 </section>
 
@@ -344,7 +392,7 @@ const f3 = n => (n==null||n==='')?'-':Number(n).toLocaleString('tr-TR',{minimumF
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const dtr = s => (!s||s==='-')?'-':s.split('-').reverse().join('.');
 const REPC = {};
-['#2a78d6','#1baf7a','#eb6834','#4a3aa7','#e87ba4'].forEach((c,i)=>{
+['#E11D48','#0E7490','#B45309','#4a3aa7','#0f766e'].forEach((c,i)=>{
   const n = D.team.members.concat([D.team.lead])[i]; if(n) REPC[n]=c;});
 
 $('#hdrScope').textContent = D.scope.cities.join(' · ');
@@ -654,51 +702,117 @@ function openDetail(cid){
   $('#dBody').scrollTop=0;
 }
 
-/* =================== TEAM LEAD =================== */
-function hbars(target, pairs, opts={}){
-  const mx=Math.max(...pairs.map(p=>p[1]),1);
-  $(target).innerHTML=pairs.map(([n,v,dim])=>`<div class="hb ${dim?'dim':''}"><span class="n" title="${esc(n)}">${esc(n)}</span>
-    <div class="t"><i style="width:${(v/mx*100).toFixed(1)}%"></i></div><span class="v">${nf(v)}</span></div>`).join('');
-}
+/* =================== EKİP PANOSU (gamification) ===================
+   Spec: "Satış Destek, Ekip Panosu 1.1.docx". Sonitel 45s+ contacts and Ekmob
+   appointment data do not exist in the payload yet, so the pano runs on
+   DETERMINISTIC MOCK DATA (seeded per rep+day) — labeled "temsili veri" in the UI.
+   Design, filters, targets and the gamification rule engine are per spec. */
+function renderOutcome(){ /* legacy hook from wbSet -- pano needs no per-change refresh */ }
 (function(){
-  const need={}; Object.entries(D.city_rules).forEach(([c,v])=>{
-    const n=v.responsible==='only_all_team_members'?D.team.members.length:v.responsible==='all_team'?D.team.members.length+1:1;
-    need[c]=v.per_day*n;});
-  const tot=Object.values(need).reduce((a,b)=>a+b,0);
-  $('#lTiles').innerHTML=[
-    ['Bugün atanan',nf(today.length),`hedef ${nf(tot)} · şehir kotası`,'accent'],
-    ['Uygun havuz',nf(R.length),'müşteri'],
-    ['Havuz ömrü',(R.length/tot).toFixed(1),'iş günü'],
-    ['Skor ≥ 1',nf(R.filter(r=>r.score>=1).length),'havuzda'],
-    ['REVİD',nf(R.filter(r=>r.revid).length),'havuzda'],
-    ['Mükerrer (aynı müşteri)',nf(R.filter(r=>r.mukerrer).length),'listede, işaretli'],
-  ].map(([k,v,s,c])=>`<div class="tile ${c||''}"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join('');
+  const TODAY=new Date(D.generated+'T00:00:00');
+  const TEAM=D.team.members.concat([D.team.lead]);
+  const CQ=100, AQ=3;                        // daily baselines: 100 görüşme · 3 randevu
+  const PROF={ };                             // [contact lo,hi, appt lo,hi]
+  TEAM.forEach((m,i)=>{ PROF[m]=[[80,112,2.2,4.2],[95,128,2.6,4.8],[72,104,1.8,3.8],[58,92,1.2,3.0]][i%4]; });
+  const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const isWork=d=>d.getDay()>=1&&d.getDay()<=5;
+  function rng(seed){ let s=0; for(const ch of seed) s=(s*31+ch.charCodeAt(0))>>>0;
+    return ()=>{ s=(s*1103515245+12345)>>>0; return (s>>>8)/16777216; }; }
+  const DB={};
+  TEAM.forEach(rep=>{ const p=PROF[rep], rows={};
+    for(let i=0;i<75;i++){ const d=new Date(TODAY); d.setDate(d.getDate()-i);
+      if(!isWork(d)) continue;
+      const r=rng(rep+'|'+iso(d));
+      const c=Math.round(p[0]+(p[1]-p[0])*r());
+      const b=Math.round(p[2]+(p[3]-p[2])*r());
+      const g=Math.min(b,Math.round(b*(0.55+0.35*r())));
+      const s=Math.min(g,Math.round(g*(0.2+0.35*r())));
+      rows[iso(d)]={c,b,g,s};
+    } DB[rep]=rows; });
 
-  const byRep={}; today.forEach(r=>byRep[r.assigned_to]=(byRep[r.assigned_to]||0)+1);
-  hbars('#cRep', Object.entries(byRep).sort((a,b)=>b[1]-a[1]));
+  let range='son7', rep='', metric='c';
+  function bounds(){
+    const t=new Date(TODAY); let d0=new Date(t), d1=new Date(t);
+    if(range==='dun'){ d0.setDate(t.getDate()-1); d1=new Date(d0); }
+    else if(range==='son7') d0.setDate(t.getDate()-6);
+    else if(range==='buay') d0.setDate(1);
+    else if(range==='gecenay'){ d0=new Date(t.getFullYear(),t.getMonth()-1,1); d1=new Date(t.getFullYear(),t.getMonth(),0); }
+    else if(range==='son30') d0.setDate(t.getDate()-29);
+    else if(range==='ozel'){ const f=$('#epFrom').value, u=$('#epTo').value;
+      if(f&&u){ d0=new Date(f+'T00:00:00'); d1=new Date(u+'T00:00:00'); if(d0>d1) [d0,d1]=[d1,d0]; } }
+    return [d0,d1];
+  }
+  function workdays(a,b){ let n=0; const d=new Date(a); while(d<=b){ if(isWork(d)) n++; d.setDate(d.getDate()+1);} return Math.max(n,1); }
+  function sums(m,a,b){ const o={c:0,b:0,g:0,s:0}, rows=DB[m]; const d=new Date(a);
+    while(d<=b){ const r=rows[iso(d)]; if(r){o.c+=r.c;o.b+=r.b;o.g+=r.g;o.s+=r.s;} d.setDate(d.getDate()+1);} return o; }
 
-  $('#cCap').innerHTML=`<thead><tr><th>İl</th><th>Kural</th><th class="num">Kişi/gün</th><th class="num">İhtiyaç</th><th class="num">Havuz</th><th class="num">Gün</th></tr></thead><tbody>${
-    Object.entries(D.city_rules).map(([c,v])=>{const pool=R.filter(r=>r.city===c).length, d=pool/need[c];
-      const p=d<3?'c':d<6?'w':'g'; return `<tr><td><b>${esc(c)}</b></td><td class="muted">${esc(v.responsible)}</td><td class="num">${v.per_day}</td><td class="num">${need[c]}</td><td class="num">${nf(pool)}</td><td class="num"><span class="pill ${p}">${d.toFixed(1)}</span></td></tr>`;}).join('')}</tbody>`;
+  function donut(el,o){
+    const pct=o.target? o.value/o.target : 0;
+    const done=pct>=1, col=done?'#10B981':'var(--s1)';
+    const C=2*Math.PI*52;
+    el.innerHTML=`<h2>${o.title}</h2><div class="hint">${o.hint}</div>
+      <div class="ep-d-body">
+        <div class="ep-ring"><svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle cx="60" cy="60" r="52" class="tr"/>
+          <circle cx="60" cy="60" r="52" class="pr" style="stroke:${col};stroke-dasharray:${C.toFixed(1)};stroke-dashoffset:${(C*(1-Math.min(pct,1))).toFixed(1)}"/>
+        </svg><div class="ep-pct" style="color:${done?'#059669':'var(--s1-550)'}">%${Math.round(pct*100)}</div></div>
+        <div class="ep-d-nums">
+          <div class="big">${nf(o.value)} <span>/ ${nf(o.target)}</span></div>
+          <div class="rem">${o.value>=o.target?'<span class="ep-ok">Hedef tamamlandı</span>':`Kotaya kalan: <b>${nf(o.target-o.value)}</b> ${o.unit}`}</div>
+          ${o.badges||''}
+        </div>
+      </div>`;
+  }
 
-  const b=[['≥ 2',2,1e9],['1 – 2',1,2],['0,5 – 1',.5,1],['0,25 – 0,5',.25,.5],['0,1 – 0,25',.1,.25],['0,05 – 0,1',.05,.1],['< 0,05',0,.05]];
-  hbars('#cHist', b.map(([l,a,z])=>[l,R.filter(r=>r.score>=a&&r.score<z).length]));
+  function render(){
+    const [a,b]=bounds(), wd=workdays(a,b);
+    const per=TEAM.map(m=>({m,...sums(m,a,b)}));
+    const scope=rep? per.filter(p=>p.m===rep) : per;
+    const tot=scope.reduce((o,p)=>({c:o.c+p.c,b:o.b+p.b,g:o.g+p.g,s:o.s+p.s}),{c:0,b:0,g:0,s:0});
+    const n=scope.length||1, who=rep||'tüm ekip';
+    donut($('#epA'),{title:'Toplam Etkili Görüşme',hint:`Sonitel · 45 sn üzeri bağlantılar · ${who} · ${wd} iş günü`,
+      value:tot.c, target:wd*CQ*n, unit:'görüşme'});
+    donut($('#epB'),{title:'Randevular &amp; Saha Dönüşümü',hint:`Ekmob · beklenen tempo 3 randevu/gün · ${who} · ${wd} iş günü`,
+      value:tot.b, target:wd*AQ*n, unit:'randevu',
+      badges:`<div class="ep-badges"><span class="ep-bd g">Gerçekleşen ziyaret <b>${nf(tot.g)}</b></span><span class="ep-bd s">Sözleşme <b>${nf(tot.s)}</b></span></div>`});
 
-  const pairs=[]; D.scope.cities.forEach(c=>D.scope.categories.forEach(k=>pairs.push([`${c} · ${k}`, R.filter(r=>r.city===c&&r.category===k).length])));
-  hbars('#cSeg', pairs);
+    const key=metric, unit=metric==='c'?'görüşme':'randevu', tgt=metric==='c'?wd*CQ:wd*AQ;
+    const list=[...per].sort((x,y)=>(y[key]-x[key])||x.m.localeCompare(y.m,'tr'));
+    $('#epLb').innerHTML=list.map((p,i)=>{
+      const v=p[key], pct=v/tgt*100;
+      let note;
+      if(i===0){ const diff=v-(list[1]?list[1][key]:0);
+        note=diff>0?`1. sırada: en yakın rakibinden <b>${nf(diff)}</b> ${unit} önde`:'1. sırada: en yakın rakibiyle eşit'; }
+      else{ const rem=tgt-v, over=(list[i-1][key]-v)+1;
+        note=(rem>0?`Hedefe <b>${nf(rem)}</b> ${unit} kaldı`:'Hedef aşıldı')+`; ${i}. olmaya <b>${nf(over)}</b> ${unit} kaldı`; }
+      const rk=i<3?['gold','silver','bronze'][i]:'';
+      return `<div class="ep-row ${rep===p.m?'me':''}">
+        <div class="ep-rank ${rk}">#${i+1}</div>
+        <div>${avatar(p.m)}</div>
+        <div class="ep-mid">
+          <div class="ep-nums">${nf(v)} <span>/ ${nf(tgt)}</span><em class="${pct>=100?'ok':''}">%${Math.round(pct)}</em></div>
+          <div class="ep-track"><i style="width:${Math.min(pct,100).toFixed(1)}%${pct>=100?';background:#10B981':''}"></i></div>
+          <div class="ep-note">${note}</div>
+        </div></div>`; }).join('');
+    if(rep){ const el=document.querySelector('.ep-row.me'); if(el) el.scrollIntoView({behavior:'smooth',block:'nearest'}); }
+  }
+
+  const RANGES=[['bugun','Bugün'],['dun','Dün'],['son7','Son 7 Gün'],['buay','Bu Ay'],['gecenay','Geçen Ay'],['son30','Son 30 Gün']];
+  $('#epRange').innerHTML=RANGES.map(([v,l])=>`<button data-v="${v}" class="${v===range?'on':''}">${l}</button>`).join('');
+  $('#epRange').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{ range=btn.dataset.v;
+    $('#epRange').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn)); render(); });
+  $('#epFrom').onchange=$('#epTo').onchange=()=>{ if($('#epFrom').value&&$('#epTo').value){ range='ozel';
+    $('#epRange').querySelectorAll('button').forEach(x=>x.classList.remove('on')); render(); } };
+  $('#epFrom').max=$('#epTo').max=iso(TODAY);
+  $('#epFrom').min=$('#epTo').min=iso(new Date(TODAY.getTime()-74*86400000));
+  const rs=$('#epRep'); rs.appendChild(new Option('Tüm Ekip (Genel Toplam)',''));
+  TEAM.forEach(m=>rs.appendChild(new Option(m,m)));
+  rs.onchange=()=>{ rep=rs.value; render(); };
+  $('#epMetric').innerHTML=`<button data-v="c" class="on">Görüşme Sıralaması</button><button data-v="b">Randevu Sıralaması</button>`;
+  $('#epMetric').querySelectorAll('button').forEach(btn=>btn.onclick=()=>{ metric=btn.dataset.v;
+    $('#epMetric').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===btn)); render(); });
+  render();
 })();
-function renderOutcome(){
-  const counts={}; WB_OPTS.sonuc.forEach(o=>counts[o]=0);
-  today.forEach(r=>{ const v=wbGet(r.customer_id,'sonuc'); if(v) counts[v]=(counts[v]||0)+1; });
-  const total=Object.values(counts).reduce((a,b)=>a+b,0);
-  if(!total){ $('#cOut').innerHTML='<div class="muted" style="font-size:12px;padding:8px 0">Henüz sonuç kodu girilmedi — listede bir satırın "Sonuç Kodu" alanını seçin.</div>'; }
-  else hbars('#cOut', Object.entries(counts));
-  const reps=D.team.members.concat([D.team.lead]).filter(m=>today.some(r=>r.assigned_to===m));
-  $('#cDone').innerHTML=reps.map(m=>{ const mine=today.filter(r=>r.assigned_to===m);
-    const done=mine.filter(r=>wbGet(r.customer_id,'sonuc')).length; const pct=mine.length?done/mine.length*100:0;
-    return `<div class="hb"><span class="n">${esc(m)}</span><div class="t"><i style="width:${pct.toFixed(1)}%"></i></div><span class="v">${done}/${mine.length}</span></div>`; }).join('');
-}
-renderOutcome();
 
 /* =================== ABOUT =================== */
 $('#aBody').innerHTML=`
@@ -725,6 +839,9 @@ Hızlı filtre, seçilen nedeni taşıyan satırları gizler.</li>
 <li><b>Ekmob</b> sütunları (Son Satış Ziyareti / Satışçı / Ziyaret Notu) — Gocust verisi Qlik'te bulunamadı.</li>
 <li><b>Sonuç Kodu, Segment, Randevu Kiminle</b> — yazılabilir alanlar. Bu örnekte seçimler <u>yalnızca bu tarayıcıda</u> (localStorage) saklanır; Qlik salt-okunur olduğu için gerçek kayıt altyapısı PROJECT §12.1'in konusudur.</li>
 <li><b>Hatırlatmalar</b> — geçmiş arama kaydı gerektirir.</li>
+<li><b>Ekip panosu</b> — Sonitel (45 sn+ görüşme) ve Ekmob (randevu/ziyaret/sözleşme) entegrasyonu henüz yok;
+pano <u>temsili (mock) veriyle</u> çalışır. Tasarım, filtreler, hedef hesapları ve sıralama kuralları
+"Satış Destek, Ekip Panosu 1.1" spesifikasyonuna göredir; entegrasyon kurulunca aynı ekran gerçek veriyle dolar.</li>
 <li>Skorun <b>profile_interaction</b> sinyali çekilemedi; kalan 5 sinyal 1'e normalize edildi.</li>
 <li>PM notlarında çalışan→ekip eşlemesi yok; sıra <code>note_type</code> ile yaklaşıldı.</li></ul>
 <h3>Eşikler</h3>
@@ -757,7 +874,7 @@ if(USER && USER.name){
   document.documentElement.classList.add('locked');
   const gate=document.createElement('div'); gate.className='gate';
   gate.innerHTML=`<div class="gcard">
-    <div class="brand"><span class="dot"></span>SAD Arama Listesi</div>
+    <div class="brand" style="flex-direction:column;align-items:flex-start;gap:8px"><svg class="dlogo" viewBox="0 0 1000 190.04" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="düğün.com"><path d="M258.73,22.9l8.01-20.61c9.16,3.43,16.6,5.72,26.33,5.72,9.73,0,17.17-2.29,26.33-5.72l9.73,20.61c-11.45,5.72-22.9,9.73-36.06,9.73-13.17,0-24.61-4.01-34.34-9.73Z"/><path d="M520.89,44.08c25.19,0,40.07,13.17,44.08,43.5l7.44,53.23h-28.62s-7.44-51.52-7.44-51.52c-1.72-13.17-5.72-20.61-15.46-20.61-9.73,0-14.88,7.44-14.88,20.61v51.52s-28.62,0-28.62,0v-53.23c0-30.34,18.32-43.5,43.5-43.5Z"/><path d="M891.81,44.08c12.02,0,22.32,4.01,29.77,14.88,7.44-10.3,17.74-14.88,29.77-14.88,20.61,0,36.06,13.17,40.64,43.5l8.01,53.23h-28.05s-7.44-51.52-7.44-51.52c-1.72-13.17-7.44-20.61-17.17-20.61-9.16,0-13.74,9.16-12.59,20.61l4.58,51.52h-27.48s-4.58-51.52-4.58-51.52c-1.14-13.17-5.72-20.61-14.88-20.61-9.73,0-14.88,7.44-14.88,20.61v51.52s-28.62,0-28.62,0v-53.23c0-30.34,20.61-43.5,42.93-43.5Z"/><path d="M627.07,94.45c0-29.77,23.47-50.37,54.38-50.37,12.59,0,23.47,3.43,32.05,9.16l-9.73,22.9c-4.58-4.01-11.45-7.44-20.61-7.44-15.46,0-27.48,10.88-27.48,25.76,0,14.88,12.02,25.19,27.48,25.19,9.16,0,16.03-3.43,20.61-7.44l9.73,22.9c-8.59,5.72-19.46,9.16-32.05,9.16-30.91,0-54.38-20.03-54.38-49.8Z"/><path d="M292.21,44.08c-28.62,0-53.23,18.89-53.23,49.8,0,30.91,23.47,50.37,52.09,50.37,9.73,0,18.32-2.29,24.04-6.3,0,14.88-12.59,27.48-33.2,27.48-12.02,0-24.04-4.01-34.92-11.45l-5.72,26.33c13.74,6.3,28.62,9.73,44.08,9.73,43.5,0,59.53-28.13,59.53-58.14v-32.3c0-36.63-24.04-55.52-52.66-55.52ZM291.93,119.63c-14.31,0-24.04-10.3-24.04-25.19,0-14.88,9.73-25.76,24.04-25.76,14.31,0,24.04,10.88,24.04,25.76,0,14.88-9.73,25.19-24.04,25.19Z"/><path d="M77.28,9.73v42.36c-5.15-4.58-13.74-8.01-25.19-8.01C23.47,44.08,0,63.54,0,94.45c0,30.91,24.61,49.8,53.23,49.8,28.62,0,52.66-18.89,52.66-49.8V9.73s-28.62,0-28.62,0ZM53.23,119.63c-14.31,0-24.04-10.88-24.04-25.76,0-14.88,9.73-25.19,24.04-25.19,14.31,0,24.04,10.3,24.04,25.19,0,14.88-9.73,25.76-24.04,25.76Z"/><path d="M778.48,44.08c-29.77,0-53.23,20.61-53.23,50.37,0,29.76,23.47,49.8,53.23,49.8,29.77,0,53.23-20.03,53.23-49.8,0-29.77-23.47-50.37-53.23-50.37ZM778.48,119.63c-14.31,0-24.61-10.88-24.61-25.19,0-14.31,10.3-25.76,24.61-25.76,14.31,0,24.61,11.45,24.61,25.76,0,14.31-10.3,25.19-24.61,25.19Z"/><path d="M128.79,99.03v-51.52s28.62,0,28.62,0v51.52c0,13.17,7.44,20.61,17.17,20.61,9.73,0,17.17-7.44,17.17-20.61v-51.52s28.62,0,28.62,0v51.52c0,28.62-17.17,45.22-45.79,45.22-28.62,0-45.79-16.6-45.79-45.22Z"/><path d="M132.09,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M181.4,17.57C181.4,7.08,189.27,0,199.24,0c9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M364.05,99.03v-51.52s28.62,0,28.62,0v51.52c0,13.17,7.44,20.61,17.17,20.61,9.73,0,17.17-7.44,17.17-20.61v-51.52s28.62,0,28.62,0v51.52c0,28.62-17.17,45.22-45.79,45.22-28.62,0-45.79-16.6-45.79-45.22Z"/><path d="M367.35,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M416.67,17.57c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/><path d="M583.19,126.67c0-10.49,7.87-17.57,17.84-17.57,9.97,0,17.84,7.08,17.84,17.57,0,10.49-7.87,17.57-17.84,17.57-9.97,0-17.84-7.08-17.84-17.57Z"/></svg><span style="font-size:13px">SAD Arama Listesi</span></div>
     <h1>Giriş</h1>
     <div class="sub">düğün.com mail adresiniz ve SAD arama listesi şifrenizle giriş yapın.</div>
     <form class="gf" id="gf" autocomplete="on">
